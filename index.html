@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Playground</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>Vue Playground</h1>
+        </header>
+
+        <main>
+            <!-- Counter -->
+            <section class="card">
+                <h2>Counter</h2>
+                <p class="counter-display">{{ count }}</p>
+                <p>Double: {{ doubleCount }}</p>
+                <div class="button-row">
+                    <button @click="increment">Add 1</button>
+                    <button @click="count += 5">Add 5</button>
+                    <button class="btn-secondary" @click="reset">Reset</button>
+                </div>
+            </section>
+
+            <!-- Todo List -->
+            <section class="card">
+                <h2>Todo List ({{ remainingCount }})</h2>
+                <form @submit.prevent="addTodo">
+                    <div class="input-row">
+                        <input v-model="newTodo" placeholder="What needs to be done?">
+                        <button type="submit">Add</button>
+                    </div>
+                </form>
+
+                <div class="filter-row">
+                    <button :class="{ active: filter === 'all' }" @click="filter = 'all'">All</button>
+                    <button :class="{ active: filter === 'active' }" @click="filter = 'active'">Active</button>
+                    <button :class="{ active: filter === 'done' }" @click="filter = 'done'">Done</button>
+                </div>
+
+                <ul>
+                    <li v-for="(todo, i) in filteredTodos" :key="i" :class="{ done: todo.done }">
+                        <input type="checkbox" v-model="todo.done">
+                        <span>{{ todo.text }}</span>
+                        <button class="btn-delete" @click="removeTodo(i)">x</button>
+                    </li>
+                </ul>
+                <p v-if="filteredTodos.length === 0" class="empty">
+                    <span v-if="filter === 'all'">Nothing to do yet.</span>
+                    <span v-else-if="filter === 'active'">All done!</span>
+                    <span v-else>No completed tasks.</span>
+                </p>
+                <p v-if="todos.length > 0" class="clear-row">
+                    <button class="btn-secondary" @click="clearDone">Clear completed</button>
+                </p>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
