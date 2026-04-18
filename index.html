@@ -18,9 +18,12 @@
                 <h2>Counter</h2>
                 <p class="counter-display">{{ count }}</p>
                 <p>Double: {{ doubleCount }}</p>
+                <p>Triple: {{ tripleCount }}</p>
+                <p>Saved Numbers: {{ numbers.join(', ') }}</p>
                 <div class="button-row">
                     <button @click="increment">Add 1</button>
                     <button @click="count += 5">Add 5</button>
+                    <button @click="saveNumber">Save number</button>
                     <button class="btn-secondary" @click="reset">Reset</button>
                 </div>
             </section>

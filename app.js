@@ -5,6 +5,9 @@ Vue.createApp({
             // Counter
             count: 0,
 
+            //Number list
+            numbers: [],
+
             // Todos
             newTodo: "",
             filter: "all",
@@ -17,11 +20,13 @@ Vue.createApp({
         };
     },
 
-    computed: {
+    computed: { 
         doubleCount() {
             return this.count * 2;
         },
-
+        tripleCount() {
+            return this.count * 3;
+        },
         remainingCount() {
             return this.todos.filter(t => !t.done).length;
         },
@@ -37,6 +42,9 @@ Vue.createApp({
         // Counter
         increment() {
             this.count++;
+        },
+        saveNumber() {
+            this.numbers.push(this.count);
         },
 
         reset() {
